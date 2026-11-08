@@ -1,4 +1,4 @@
-const CACHE_NAME = 'shiftlog-site-v2';
+const CACHE_NAME = 'shiftlog-site-v3';
 const APP_FILES = ['./', './index.html', './manifest.webmanifest', './icon.svg'];
 
 self.addEventListener('install', event => {
@@ -18,7 +18,7 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET' || new URL(event.request.url).origin !== self.location.origin) return;
   if (event.request.mode === 'navigate') {
-    event.respondWith(fetch(event.request).then(response => {
+    event.respondWith(fetch(new Request(event.request, { cache: 'no-store' })).then(response => {
       const copy = response.clone();
       caches.open(CACHE_NAME).then(cache => cache.put('./index.html', copy));
       return response;
