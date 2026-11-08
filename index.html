@@ -109,7 +109,7 @@
   $('saveShifts').addEventListener('click',()=>{document.querySelectorAll('[data-shift]').forEach(i=>{data.shifts[i.dataset.shift][i.dataset.part]=i.value||'00:00'});save();renderAll();toast('班別時間已儲存')});
   document.querySelectorAll('[data-paytype]').forEach(b=>b.addEventListener('click',()=>{data.pay.type=b.dataset.paytype;renderSettings()}));$('savePay').addEventListener('click',()=>{data.pay.monthlySalary=Number($('monthlySalary').value)||0;data.pay.monthlyHours=Math.max(1,Number($('monthlyHours').value)||240);data.pay.hourlyWage=Number($('hourlyWage').value)||0;for(const k of ['weekday1','weekday2','rest1','rest2','rest3','holidayDays','holiday9','holiday11','regularHoliday'])data.pay[k]=Number($(k).value)||defaults.pay[k];save();renderAll();toast('薪資與加班倍率已儲存')});
   renderAll();tick();
-  if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol))navigator.serviceWorker.register('./sw.js').catch(error=>console.warn('離線快取啟用失敗',error));
+  if('serviceWorker' in navigator&&/^https?:$/.test(location.protocol)){let refreshingAfterUpdate=false;if(navigator.serviceWorker.controller)navigator.serviceWorker.addEventListener('controllerchange',()=>{if(!refreshingAfterUpdate){refreshingAfterUpdate=true;location.reload()}});navigator.serviceWorker.register('./sw.js',{updateViaCache:'none'}).then(registration=>registration.update()).catch(error=>console.warn('離線快取啟用失敗',error))}
 })();
 </script>
 </body>
