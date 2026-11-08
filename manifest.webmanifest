@@ -1,0 +1,22 @@
+{
+  "id": "./",
+  "name": "班點 — 出勤與薪資紀錄",
+  "short_name": "班點",
+  "description": "班表、打卡與薪資紀錄",
+  "lang": "zh-Hant",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f5f7f3",
+  "theme_color": "#1d6b4f",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
+
